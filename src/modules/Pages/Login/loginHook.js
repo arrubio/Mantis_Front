@@ -22,33 +22,27 @@ const useLoginForm = (schema) =>
         if(!error)
         {         
            
-           var req = JSON.stringify(inputs);
+           //var req = JSON.stringify(inputs);
                 
-                var myHeaders = new Headers();
-                myHeaders.append('Content-Type', 'application/json');
-
+            var myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
                 var myInit = { method: 'POST',
                                 headers: myHeaders,
-                                body: req};
+                                body: new URLSearchParams({
+                                    'username':inputs.username,
+                                    'password':inputs.password
+                                })};
                 const myRequest = new Request(api, myInit);
                 fetch(myRequest)
                 .then(response => response.json())
                 .then(data =>
                 {
-                    if (data.success === true) 
-                    {
-                        setErrors("");
-                        console.log(data.message);
-                        //save the token
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('login', true);
-                        log();
-                    } 
-                    else 
-                    {
-                        setErrors(data);
-                        //setLogin("");
-                    }
+                    setErrors("");
+                    //console.log(data.message);
+                    //save the token
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('login', true);
+                    log();
                     
                 }).catch(() => {
                     setErrors({message:"Error while getting the response"});

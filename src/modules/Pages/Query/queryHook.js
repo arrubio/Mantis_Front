@@ -16,40 +16,49 @@ const useQueryForm = (schema) =>
         
 
         console.log("Form Submitted");
-        var req = JSON.stringify(inputs);
-        
-        var myHeaders = new Headers();
-        myHeaders.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        myHeaders.append('Content-Type', 'application/json');
-        
-        var myInit = { method: 'POST',
-                        headers: myHeaders,
-                        body: req};
-        const myRequest = new Request(api, myInit);
 
-        fetch(myRequest)
-            .then(response => response.json())
-            .then(data =>
-            {
-                if (data.success === true) 
+        var req = JSON.stringify(inputs);
+
+        if(req.includes("date_submitted"))
+        {
+            var myHeaders = new Headers();
+            myHeaders.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            myHeaders.append('Content-Type', 'application/json');
+            
+            var myInit = { method: 'POST',
+                            headers: myHeaders,
+                            body: req};
+            const myRequest = new Request(api, myInit);
+
+            fetch(myRequest)
+                .then(response => response.json())
+                .then(data =>
                 {
-                    setErrors("");
-                    localStorage.setItem('query', data.html);
-                    //console.log(data.html);
-                    setHTML(data.html);
-                    let path = '/query_display'; 
-                    history.push(path);
-                } 
-                else 
+                    if (data.length != 0) 
+                    {
+                        setErrors("");
+                        localStorage.setItem('query', data);
+                        //console.log(data.html);
+                        setHTML(data);
+                        let path = '/query_display'; 
+                        history.push(path);
+                    } 
+                    else 
+                    {
+                        setErrors("No hay registros asociados a esa fecha");
+                        //console.log(data.message);
+                        //setHTML("");  
+                    }     
+                }).catch(() => 
                 {
-                    //setErrors(data);
-                    //console.log(data.message);
-                    setHTML("");  
-                }     
-            }).catch(() => 
-            {
-                    
-            });
+                        
+                });
+        }
+        else
+        {
+            setErrors("Debe incluir una fecha");
+        }
+        
     };
 
     const handleInputChange = (event) =>

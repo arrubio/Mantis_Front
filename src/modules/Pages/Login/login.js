@@ -10,7 +10,7 @@ import useLogin from './loginBetween';
 
 const schema = Joi.object(
   {
-    email: Joi.string().email({tlds: {allow: false}}),
+    username: Joi.string().email({tlds: {allow: false}}),
     password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
   }
 );
@@ -30,7 +30,7 @@ const Login = () =>
                   <div className="mb-3 row">
                     <label for="email" className="form-label col-sm-5 col-form-label">Email address</label>
                     <div className="col-sm-7">
-                    <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleInputChange}/>
+                    <input type="username" className="form-control" id="username" name="username" placeholder="name@example.com" onChange={handleInputChange}/>
                     </div>
                   </div>
                   <div className="mb-3 row">

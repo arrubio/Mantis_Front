@@ -3,6 +3,7 @@ import './query.css';
 import useQueryForm from './queryHook';
 import { Form } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
+import SimpleDateFormat from "@riversun/simple-date-format";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,7 +16,8 @@ const Query = () =>
 
   const dateChanged = () =>
   {
-      let targe = {name: "date_submitted", value: startDate};
+      const sdf = new SimpleDateFormat("yyyy-MM-dd");
+      let targe = {name: "date_submitted", value: sdf.format(startDate)};
       let event = {target: targe};
 
       handleInputChange(event);
@@ -33,7 +35,7 @@ const Query = () =>
                   </div>*/}
                   <div className="form-group">
                     <label for="inputAddress">Nombre del proyecto</label>
-                    <input type="text" className="form-control" id="proyecto" name="proyecto" placeholder="Proyecto X" onChange={handleInputChange}/>
+                    <input type="text" className="form-control" id="name" name="name" placeholder="Proyecto X" onChange={handleInputChange}/>
                   </div>
                   <div className="form-group">
                     <label for="inputAddress">Fecha del proyecto</label>
@@ -51,7 +53,7 @@ const Query = () =>
               </div>
             </div>
             {errors !== "" ? (<div className="alert alert-warning alert-dismissible fade show" role="alert">
-                              <strong>Error!</strong> {errors.message}
+                              <strong>Error!</strong> {errors}
                             </div>) : 
                                     (<div></div>)}
 

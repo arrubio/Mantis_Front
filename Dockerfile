@@ -5,10 +5,10 @@ ENV NODE_ENV = production
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-ENV DOMAIN http://localhost:3001
-ENV REACT_APP_LOGIN $DOMAIN/login
-ENV REACT_APP_QUERY $DOMAIN/query
-ENV REACT_APP_REGISTER $DOMAIN/sign-in
+ENV DOMAIN http://localhost:80
+ENV REACT_APP_LOGIN $DOMAIN/token
+ENV REACT_APP_QUERY $DOMAIN/modelbugs
+ENV REACT_APP_REGISTER $DOMAIN/sign_in
 
 
 WORKDIR /usr/src/app
