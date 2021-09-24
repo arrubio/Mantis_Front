@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import parse from 'html-react-parser'; 
-import NewWindow from 'react-new-window'
+import NewWindow from 'react-new-window' 
 
 class QueryDisplay extends Component
 {

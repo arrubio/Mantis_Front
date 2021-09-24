@@ -1,6 +1,6 @@
 import {useState} from "react";
 import { useHistory } from 'react-router-dom';
-const api = process.env.REACT_APP_QUERY;
+const api = process.env.REACT_APP_QUERY; 
 
 const useQueryForm = (schema) =>
 {
@@ -34,7 +34,7 @@ const useQueryForm = (schema) =>
                 .then(response => response.json())
                 .then(data =>
                 {
-                    if (data.length != 0) 
+                    if (data.length !== 0) 
                     {
                         setErrors("");
                         localStorage.setItem('query', data);
